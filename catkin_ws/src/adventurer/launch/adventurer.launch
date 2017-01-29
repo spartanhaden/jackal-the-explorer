@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="adventurer" name="explorer" type="explorer.py" output="screen"/>
+</launch>
