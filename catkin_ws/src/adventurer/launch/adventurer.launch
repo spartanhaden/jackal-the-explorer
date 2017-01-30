@@ -39,4 +39,7 @@
 
     <node pkg="adventurer" name="explorer" type="explorer.py" output="screen"/>
 
+    <arg name="rviz_config" value="gmapping" />
+    <node name="rviz_jackal" pkg="rviz" type="rviz" args="-d $(find jackal_viz)/rviz/$(arg rviz_config).rviz" />
+
 </launch>
