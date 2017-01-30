@@ -4,14 +4,16 @@ import rospy
 import time
 import actionlib
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
-#from geometry_msgs.msg import PoseStamped, Pose, Point, Quaternion
+
+# from geometry_msgs.msg import PoseStamped, Pose, Point, Quaternion
 
 max_trial_time = 600
 max_wait_time = 35
 
 # Tested with jackal navigation tutorial
 
-def getGoal():
+
+def get_goal():
 
     goal = MoveBaseGoal()
     goal.target_pose.header.frame_id = 'map'
@@ -28,9 +30,9 @@ def getGoal():
 
 if __name__ == "__main__":
 
-    # arguements for map length and width
-   # x = sys.argv[1]
-   # y = sys.argv[2]
+    # arguments for map length and width
+    # x = sys.argv[1]
+    # y = sys.argv[2]
 
     rospy.init_node('explorer', anonymous=True)
     rate = rospy.Rate(10)
@@ -40,16 +42,16 @@ if __name__ == "__main__":
 
     try:
         # Get Randomized Goal Pose values
-        goal = getGoal()
+        goal = get_goal()
 
         client.send_goal(goal)
-        #client.wait_for_result()
+        # client.wait_for_result()
         goal_time = time.time()
         # Terminate Goal after max_wait_time
         while not done:
 
             current_time = time.time()
-            if((goal_time + max_wait_time) < current_time):
+            if (goal_time + max_wait_time) < current_time:
                 done = True
                 rospy.loginfo("Setting done to true")
             rate.sleep()
