@@ -24,6 +24,9 @@ msg/_*.py
 *.dox
 *.wikidoc
 
+# Ignore pycharm files
+.idea
+
 # eclipse stuff
 .project
 .cproject
