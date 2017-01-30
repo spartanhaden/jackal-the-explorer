@@ -22,7 +22,16 @@
     <arg name="use_sim_time" value="$(arg use_sim_time)" />
     <arg name="headless" value="$(arg headless)" />
     <arg name="world_name" value="$(arg world_name)" />
-</include>
+    </include>
+
+    <!-- Load Jackal's description, controllers, and teleop nodes. -->
+    <include file="$(find jackal_description)/launch/description.launch">
+    <arg name="config" value="$(arg config)" />
+    </include>
+    <include file="$(find jackal_control)/launch/control.launch" />
+    <include file="$(find jackal_control)/launch/teleop.launch">
+    <arg name="joystick" value="false"/>
+    </include>
 
 
     <node pkg="adventurer" name="explorer" type="explorer.py" output="screen"/>
