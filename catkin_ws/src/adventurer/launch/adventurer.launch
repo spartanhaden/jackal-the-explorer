@@ -1,15 +1,13 @@
 <launch>
-    <node pkg="adventurer" name="explorer" type="explorer.py" output="screen"/>
-</launch>
 
-<launch>
+    <!-- use the provided project3.world in the gazebo simulation -->
     <arg name="use_sim_time" default="true" />
     <arg name="gui" default="true" />
     <arg name="headless" default="false" />
-    <arg name="world_name" default="$(find jackal_sim)/worlds/project3.world" />
+    <arg name="world_name" default="$(find adventurer)/worlds/project3.world" />
 
     <!-- Equip Jackal with laser -->
-    <arg name="front_laser" default="false" />
+    <arg name="front_laser" default="true" />
     <arg name="default_config" value="front_laser" if="$(arg front_laser)" />
     <arg name="default_config" value="base" unless="$(arg front_laser)" />
 
@@ -25,3 +23,8 @@
     <arg name="headless" value="$(arg headless)" />
     <arg name="world_name" value="$(arg world_name)" />
 </include>
+
+
+    <node pkg="adventurer" name="explorer" type="explorer.py" output="screen"/>
+
+</launch>
