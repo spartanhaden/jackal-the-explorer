@@ -4,27 +4,27 @@ import rospy
 import time
 import actionlib
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
-import random
-
-# from geometry_msgs.msg import PoseStamped, Pose, Point, Quaternion
+from random import randint
 
 # set the maximum time allowed for mapping
 max_trial_time = 600
 
 
 # function to get a random goal pose
-# def get_goal():
+def get_goal():
     # Get Randomized Goal Pose value
-    # goal = set_goal()
-#    pass
+    pos_x = randint(-9, 9)
+    pos_y = randint(-5, 5)
+    goal = set_goal(pos_x, pos_y)
+    return goal
 
 
 # function to set the random goal
-def set_goal():
+def set_goal(x, y):
     goal = MoveBaseGoal()
     goal.target_pose.header.frame_id = 'map'
-    goal.target_pose.pose.position.x = 10
-    goal.target_pose.pose.position.y = 1
+    goal.target_pose.pose.position.x = x
+    goal.target_pose.pose.position.y = y
     goal.target_pose.pose.position.z = 0
     goal.target_pose.pose.orientation.x = 0
     goal.target_pose.pose.orientation.y = 0
@@ -47,7 +47,8 @@ if __name__ == "__main__":
     done = False
 
     try:
-        goal = set_goal()
+        goal = get_goal()
+
         client.send_goal(goal)
         # client.wait_for_result()
         init_time = time.time()
