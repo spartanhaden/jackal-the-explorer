@@ -36,10 +36,6 @@ def set_goal(x, y):
 
 if __name__ == "__main__":
 
-    # arguments for map length and width
-    # x = sys.argv[1]
-    # y = sys.argv[2]
-
     rospy.init_node('explorer', anonymous=True)
     rate = rospy.Rate(10)
     client = actionlib.SimpleActionClient('move_base', MoveBaseAction)
@@ -53,8 +49,16 @@ if __name__ == "__main__":
         # client.wait_for_result()
         init_time = time.time()
         # Terminate Goal after max_wait_time
+        switch = init_time
         while not done:
             current_time = time.time()
+
+            # get a random goal after 30 seconds
+            if (current_time-switch) > 30:
+                goal = get_goal()
+                client.send_goal(goal)
+                switch = time.time()
+
             # enters if loop once max_wait_time is reached
             if (current_time - init_time) > max_trial_time:
                 done = True
@@ -62,7 +66,7 @@ if __name__ == "__main__":
                 client.cancel_all_goals()
                 rospy.loginfo("Setting done to true")
             rate.sleep()
-        done = False
+        # done = False
 
     except rospy.ROSInterruptException:
         pass
