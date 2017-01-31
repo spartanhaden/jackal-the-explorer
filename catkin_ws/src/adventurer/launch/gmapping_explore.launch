@@ -1,9 +1,0 @@
-<launch>
-
-  <!--- Run gmapping -->
-  <include file="$(find adventurer)/launch/include/gmapping.launch" />
-
-  <!--- Run Move Base -->
-  <include file="$(find adventurer)/launch/include/move_base.launch" />
-
-</launch>
