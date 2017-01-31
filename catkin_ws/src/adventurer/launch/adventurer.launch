@@ -34,8 +34,8 @@
     </include>
 
     <!--Load the gmapping  and odometry launch files-->
-    <include file="$(find jackal_navigation)/launch/odom_navigation_demo.launch" />
-    <include file="$(find jackal_navigation)/launch/include/gmapping.launch" />
+    <include file="$(find adventurer)/launch/odom_navigation_explore.launch" />
+    <include file="$(find adventurer)/launch/include/gmapping.launch" />
 
     <node pkg="adventurer" name="explorer" type="explorer.py" output="screen"/>
 
